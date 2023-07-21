@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 
 export const metadata = {
-  title: '',
+  title: 'TheBLOKC | Internship Challenge',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
