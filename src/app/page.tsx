@@ -4,20 +4,52 @@ import { useState } from 'react';
 import Image from "next/image";
 
 export default function Page() {
-  const [wallet, setWallet] = useState({ accounts: [] });
+  const [account, setAccount] = useState<account>({
+    address: '',
+    balance: '',
+  });
 
-  function connectMetamask() {
-    async function getAccounts() {
+  async function getAccounts() {
+    try {
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
 
-      return accounts;
+      return accounts as string[];
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    getAccounts()
-      .then((accounts) => setWallet(accounts))
+  async function getBalance(address: string) {
+    try {
+      const rawBalance = await window.ethereum.request({
+        method: 'eth_getBalance',
+        params: [address, 'latest'],
+      });
+      const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
+
+      return balance;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function updateAccount() {
+    const accounts = await getAccounts();
+
+    const address = accounts.at(0);
+    const balance = await getBalance(address);
+
+    return { address, balance };
+  }
+
+  function connectMetamask() {
+    updateAccount()
+      .then(({ address, balance }) => setAccount(() => ({ address, balance })))
       .catch((error) => console.error(error));
+
+    console.log(account);
   }
 
   return (
