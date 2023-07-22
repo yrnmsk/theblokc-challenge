@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from "next/image";
 
 export default function Page() {
@@ -8,6 +8,7 @@ export default function Page() {
     address: '',
     balance: '',
   });
+  const connected = useRef(false);
 
   async function getAccounts() {
     try {
@@ -48,9 +49,17 @@ export default function Page() {
     updateAccount()
       .then(({ address, balance }) => setAccount(() => ({ address, balance })))
       .catch((error) => console.error(error));
+
+    connected.current = true;
   }
 
-  return (
+  function copyToClipboard() {
+    window.navigator.clipboard
+      .writeText(account.address)
+      .catch((error) => console.error(error));
+  }
+
+  const connect = (
     <div className='flex flex-col gap-6 px-10 py-8 bg-slate-800 rounded-2xl'>
       <div className='flex flex-col gap-3'>
         <h3 className='text-slate-200 text-2xl font-bold'>Connect wallet</h3>
@@ -65,4 +74,30 @@ export default function Page() {
       </button>
     </div>
   );
+
+  const display = (
+    <div className='max-w-5/12 flex flex-col gap-6 px-10 py-8 bg-slate-800 rounded-2xl'>
+      <div className='flex flex-col gap-3'>
+        <h3 className='text-slate-200 text-2xl font-bold'>Wallet account</h3>
+        <hr className='border-slate-600'/>
+      </div>
+      <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-1'>
+          <label className='text-slate-400 font-bold text-sm capitalize' htmlFor='address'>address</label>
+          <div className="bg-slate-700 border border-slate-500 rounded-lg relative">
+            <input className='bg-transparent text-slate-200 font-extralight truncate border-none outline-none pl-4 pr-14 py-2' type="text" name="address" id="address" value={account.address} readOnly />
+            <button className='p-[10px] absolute flex border-l border-slate-500 rounded-r-lg items-center justify-center top-0 right-0' onClick={copyToClipboard}>
+              <Image src='/icon-copy.svg' alt='copy icon' width={20} height={20} />
+            </button>
+          </div>
+        </div>
+        <div className='flex flex-col gap-1'>
+          <span className='text-slate-400 font-bold text-sm capitalize'>balance</span>
+          <span className='text-slate-200 font-extrabold'>${account.balance}</span>
+        </div>
+      </div>
+    </div>
+  );
+
+  return connected.current ? display : connect;
 }
