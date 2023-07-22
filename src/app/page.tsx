@@ -12,11 +12,11 @@ export default function Page() {
 
   async function getAccounts() {
     try {
-      const accounts = await window.ethereum.request({
+      const accounts = await window.ethereum.request<string[]>({
         method: 'eth_requestAccounts',
       });
 
-      return accounts as string[];
+      return accounts;
     } catch (error) {
       console.error(error);
     }
@@ -24,7 +24,7 @@ export default function Page() {
 
   async function getBalance(address: string) {
     try {
-      const rawBalance = await window.ethereum.request({
+      const rawBalance = await window.ethereum.request<string>({
         method: 'eth_getBalance',
         params: [address, 'latest'],
       });
