@@ -38,4 +38,4 @@ Dev dependency
 ### Links
 
 - [TheBLOKC](https://theblokc.com)
-- [Live demo]()
+- [Live demo](https://theblokc-challenge.vercel.app)
