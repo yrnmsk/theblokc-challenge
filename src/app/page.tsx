@@ -6,10 +6,18 @@ import Image from "next/image";
 export default function Page() {
   const [wallet, setWallet] = useState({ accounts: [] });
 
-  async function connectMetamask() {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts', });
+  function connectMetamask() {
+    async function getAccounts() {
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-    setWallet({ accounts });
+      return accounts;
+    }
+
+    getAccounts()
+      .then((accounts) => setWallet(accounts))
+      .catch((error) => console.error(error));
   }
 
   return (
