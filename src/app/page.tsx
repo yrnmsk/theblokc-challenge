@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from "next/image";
 
-export default function Button() {
+export default function Page() {
   const [wallet, setWallet] = useState({ accounts: [] });
 
   async function connectMetamask() {
