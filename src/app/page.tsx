@@ -48,8 +48,6 @@ export default function Page() {
     updateAccount()
       .then(({ address, balance }) => setAccount(() => ({ address, balance })))
       .catch((error) => console.error(error));
-
-    console.log(account);
   }
 
   return (
