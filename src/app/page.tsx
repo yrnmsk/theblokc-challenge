@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Page() {
   const [account, setAccount] = useState<account>({
@@ -60,40 +60,65 @@ export default function Page() {
   }
 
   const connect = (
-    <div className='flex flex-col gap-6 px-10 py-8 bg-slate-800 rounded-2xl'>
+    <div className='flex flex-col gap-6 rounded-2xl bg-slate-800 px-10 py-8'>
       <div className='flex flex-col gap-3'>
-        <h3 className='text-slate-200 text-2xl font-bold'>Connect wallet</h3>
-        <hr className='border-slate-600'/>
+        <h3 className='text-2xl font-bold text-slate-200'>Connect wallet</h3>
+        <hr className='border-slate-600' />
       </div>
       <button
-        className='px-4 py-3 bg-gradient-to-br from-sky-500/75 from-60% to-indigo-500/50 shadow-inner shadow-indigo-300 transition-all ease-out duration-75 text-slate-50 border border-sky-900 rounded-lg flex flex-row gap-2 justify-center items-center hover:from-sky-500/50 hover:from-30% hover:to-indigo-500/30 hover:border-sky-400 hover:shadow-lg hover:shadow-indigo-950 hover:translate-x-1 hover:-translate-y-1'
-        onClick={connectMetamask}
-      >
+        className='flex flex-row items-center justify-center gap-2 rounded-lg border border-sky-900 bg-gradient-to-br from-sky-500/75 from-60% to-indigo-500/50 px-4 py-3 text-slate-50 shadow-inner shadow-indigo-300 transition-all duration-75 ease-out hover:-translate-y-1 hover:translate-x-1 hover:border-sky-400 hover:from-sky-500/50 hover:from-30% hover:to-indigo-500/30 hover:shadow-lg hover:shadow-indigo-950'
+        onClick={connectMetamask}>
         <span>Connect with Metamask</span>
-        <Image className='h-auto' src='/icon-metamask.svg' alt='metamask logo' width={32} height={32} />
+        <Image
+          className='h-auto'
+          src='/icon-metamask.svg'
+          alt='metamask logo'
+          width={32}
+          height={32}
+        />
       </button>
     </div>
   );
 
   const display = (
-    <div className='max-w-5/12 flex flex-col gap-6 px-10 py-8 bg-slate-800 rounded-2xl'>
+    <div className='max-w-5/12 flex flex-col gap-6 rounded-2xl bg-slate-800 px-10 py-8'>
       <div className='flex flex-col gap-3'>
-        <h3 className='text-slate-200 text-2xl font-bold'>Wallet account</h3>
-        <hr className='border-slate-600'/>
+        <h3 className='text-2xl font-bold text-slate-200'>Wallet account</h3>
+        <hr className='border-slate-600' />
       </div>
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col gap-1'>
-          <label className='text-slate-400 font-bold text-sm capitalize' htmlFor='address'>address</label>
-          <div className="bg-slate-700 border border-slate-500 rounded-lg relative">
-            <input className='bg-transparent text-slate-200 font-extralight truncate border-none outline-none pl-4 pr-14 py-2' type="text" name="address" id="address" value={account.address} readOnly />
-            <button className='p-[10px] absolute flex border-l border-slate-500 rounded-r-lg items-center justify-center top-0 right-0' onClick={copyToClipboard}>
-              <Image src='/icon-copy.svg' alt='copy icon' width={20} height={20} />
+          <label
+            className='text-sm font-bold capitalize text-slate-400'
+            htmlFor='address'>
+            address
+          </label>
+          <div className='relative rounded-lg border border-slate-500 bg-slate-700'>
+            <input
+              className='truncate border-none bg-transparent py-2 pl-4 pr-14 font-extralight text-slate-200 outline-none'
+              type='text'
+              name='address'
+              id='address'
+              value={account.address}
+              readOnly
+            />
+            <button
+              className='absolute right-0 top-0 flex items-center justify-center rounded-r-lg border-l border-slate-500 p-[10px]'
+              onClick={copyToClipboard}>
+              <Image
+                src='/icon-copy.svg'
+                alt='copy icon'
+                width={20}
+                height={20}
+              />
             </button>
           </div>
         </div>
         <div className='flex flex-col gap-1'>
-          <span className='text-slate-400 font-bold text-sm capitalize'>balance</span>
-          <span className='text-slate-200 font-extrabold'>${account.balance}</span>
+          <span className='text-sm font-bold capitalize text-slate-400'>
+            balance
+          </span>
+          <span className='font-extrabold text-slate-200'>${account.balance}</span>
         </div>
       </div>
     </div>

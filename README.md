@@ -25,6 +25,7 @@ A challenge I was given for my internship assessment at TheBLOKC
 - TailwindCSS
 
 Dev dependency
+
 - @metamask/providers, for types
 
 ### Side Notes
