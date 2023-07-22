@@ -1,6 +1,10 @@
 # theblokc-challenge
 
-A challenge I was given as assessment for my internship at TheBLOKC
+A challenge I was given as an assessment for my internship application at TheBLOKC
+
+> **Warning**
+> This repository is public for submitting & archiving purposes only.
+> I won't be making any changes anymore in the future.
 
 ## Challenge
 
