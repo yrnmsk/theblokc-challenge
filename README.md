@@ -1,6 +1,6 @@
 # theblokc-challenge
 
-A challenge I was given for my internship assessment at TheBLOKC
+A challenge I was given as assessment for my internship at TheBLOKC
 
 ## Challenge
 
